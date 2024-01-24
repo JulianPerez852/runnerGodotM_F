@@ -11,9 +11,21 @@ config_version=5
 [application]
 
 config/name="Runner Godot M F"
+run/main_scene="res://scenas/test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=504
+window/size/mode=2
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

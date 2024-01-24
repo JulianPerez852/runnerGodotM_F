@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://1oqmj053v323"]
+
+[ext_resource type="PackedScene" uid="uid://hqxbpfe51c7b" path="res://scenas/character_robot_1/robot_1.tscn" id="1_5vdd0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a86dw"]
+size = Vector2(1833, 246.5)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Robot1" parent="." instance=ExtResource("1_5vdd0")]
+position = Vector2(898, 232)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(663, 500)
+shape = SubResource("RectangleShape2D_a86dw")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -946.0
+offset_top = -120.0
+offset_right = 912.0
+offset_bottom = 130.0
+metadata/_edit_use_anchors_ = true
