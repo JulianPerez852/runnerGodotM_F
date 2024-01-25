@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://hqxbpfe51c7b"]
+[gd_scene load_steps=35 format=3 uid="uid://hqxbpfe51c7b"]
 
 [ext_resource type="Script" path="res://scenas/character_robot_1/robot_1.gd" id="1_0bfi1"]
 [ext_resource type="Texture2D" uid="uid://dv4jfnpje62m3" path="res://assets/character_robot_1/speed_hit.png" id="2_07mmp"]
@@ -160,7 +160,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_sm1qs")
 }],
 "loop": true,
-"name": &"runing",
+"name": &"running",
 "speed": 10.0
 }, {
 "frames": [{
@@ -173,12 +173,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dg0pj")
 }],
-"loop": true,
+"loop": false,
 "name": &"tochdown",
 "speed": 7.0
 }]
 
-[sub_resource type="Animation" id="Animation_qiy21"]
+[sub_resource type="Animation" id="Animation_8t4xo"]
 length = 0.625
 loop_mode = 1
 tracks/0/type = "value"
@@ -206,7 +206,7 @@ tracks/1/keys = {
 "values": ["hit"]
 }
 
-[sub_resource type="Animation" id="Animation_ni7um"]
+[sub_resource type="Animation" id="Animation_w1nn7"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -234,9 +234,8 @@ tracks/1/keys = {
 "values": ["idle"]
 }
 
-[sub_resource type="Animation" id="Animation_2infl"]
+[sub_resource type="Animation" id="Animation_y3sk4"]
 length = 0.571429
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -262,7 +261,7 @@ tracks/1/keys = {
 "values": ["jumping"]
 }
 
-[sub_resource type="Animation" id="Animation_me1si"]
+[sub_resource type="Animation" id="Animation_cv0e2"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -287,10 +286,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["runing"]
+"values": ["running"]
 }
 
-[sub_resource type="Animation" id="Animation_5smcq"]
+[sub_resource type="Animation" id="Animation_owvyp"]
 length = 0.428571
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -317,73 +316,14 @@ tracks/1/keys = {
 "values": ["tochdown"]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1pcwg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8lkki"]
 _data = {
-"hit": SubResource("Animation_qiy21"),
-"idle": SubResource("Animation_ni7um"),
-"jumping": SubResource("Animation_2infl"),
-"runing": SubResource("Animation_me1si"),
-"tochdown": SubResource("Animation_5smcq")
+"hit": SubResource("Animation_8t4xo"),
+"idle": SubResource("Animation_w1nn7"),
+"jumping": SubResource("Animation_y3sk4"),
+"running": SubResource("Animation_cv0e2"),
+"tochdown": SubResource("Animation_owvyp")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4cl62"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bhh22"]
-animation = &"jumping"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eyn4h"]
-animation = &"runing"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s2x3x"]
-animation = &"tochdown"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gn6r4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bgwja"]
-advance_mode = 2
-advance_condition = &"is_moving"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1e2d"]
-advance_mode = 2
-advance_condition = &"is_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5kbbn"]
-advance_mode = 2
-advance_condition = &"is_jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5rpf5"]
-advance_mode = 2
-advance_condition = &"is_jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l3fo4"]
-reset = false
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_tochdown"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ja374"]
-advance_mode = 2
-advance_condition = &"is_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kcpwn"]
-reset = false
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_moving"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c8vpv"]
-states/idle/node = SubResource("AnimationNodeAnimation_4cl62")
-states/idle/position = Vector2(326, 100)
-states/jumping/node = SubResource("AnimationNodeAnimation_bhh22")
-states/jumping/position = Vector2(474, -40)
-states/runing/node = SubResource("AnimationNodeAnimation_eyn4h")
-states/runing/position = Vector2(474, 100)
-states/tochdown/node = SubResource("AnimationNodeAnimation_s2x3x")
-states/tochdown/position = Vector2(651, 20)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_gn6r4"), "idle", "runing", SubResource("AnimationNodeStateMachineTransition_bgwja"), "runing", "idle", SubResource("AnimationNodeStateMachineTransition_w1e2d"), "idle", "jumping", SubResource("AnimationNodeStateMachineTransition_5kbbn"), "runing", "jumping", SubResource("AnimationNodeStateMachineTransition_5rpf5"), "jumping", "tochdown", SubResource("AnimationNodeStateMachineTransition_l3fo4"), "tochdown", "idle", SubResource("AnimationNodeStateMachineTransition_ja374"), "tochdown", "runing", SubResource("AnimationNodeStateMachineTransition_kcpwn")]
-graph_offset = Vector2(52, -91)
 
 [node name="Robot1" type="CharacterBody2D"]
 script = ExtResource("1_0bfi1")
@@ -394,22 +334,15 @@ shape = SubResource("RectangleShape2D_xo4kg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5hkio")
-animation = &"idle"
+animation = &"tochdown"
 autoplay = "idle"
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_1pcwg")
+"": SubResource("AnimationLibrary_8lkki")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="AnimatedSprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_1pcwg")
-}
-tree_root = SubResource("AnimationNodeStateMachine_c8vpv")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/is_idle = false
-parameters/conditions/is_jumping = false
-parameters/conditions/is_moving = false
-parameters/conditions/is_tochdown = false
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-1, 13)
+enabled = false
+target_position = Vector2(0, 150)
