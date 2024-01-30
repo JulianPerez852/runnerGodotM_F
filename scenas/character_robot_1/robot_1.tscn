@@ -346,3 +346,10 @@ libraries = {
 position = Vector2(-1, 13)
 enabled = false
 target_position = Vector2(0, 150)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(250, -50)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_vertical_enabled = true
+drag_bottom_margin = 0.3

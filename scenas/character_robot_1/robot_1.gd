@@ -2,16 +2,21 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -600.0
+const JUMP_VELOCITY = -500.0
 enum state { idle, running, jumping, tochdown }
 
 var current_state = state.idle
 var already_play_animation = false
+var start_moving = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var sprite_animation = $AnimatedSprite2D/AnimationPlayer
 @onready var ray_cast = $RayCast2D
+@onready var camera = $Camera2D
+
+func _ready():
+	camera.enabled = true
 
 func _physics_process(delta):
 	
@@ -28,8 +33,13 @@ func move(delta):
 		
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	#var direction = Input.get_axis("ui_left", "ui_right")
 	var movement
+	
+	var direction = false
+	if start_moving:
+		direction = 1
+		
 	if direction:
 		velocity.x = direction * SPEED
 		movement = state.running
@@ -67,3 +77,9 @@ func play_animations():
 			sprite_animation.play("tochdown")
 			already_play_animation = false
 		
+func _on_timer_timeout():
+	start_moving = true
+
+
+func _on_area_2d_body_entered(body):
+	start_moving = false
